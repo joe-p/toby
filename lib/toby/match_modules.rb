@@ -21,8 +21,8 @@ module Toby
     end
 
     module KeyValue
-      def key
-        capture(:stripped_key).value.first
+      def keys
+        capture(:stripped_key).value
       end
 
       def value
@@ -35,7 +35,7 @@ module Toby
 
       def toml_object
         Toby::TomlKeyValue.new(
-          key,
+          keys,
           value,
           comment
         )

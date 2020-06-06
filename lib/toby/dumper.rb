@@ -18,15 +18,11 @@ module Toby
       value = key_value.value
       value = value.dump if value.is_a? String
 
-      key = key_value.key
-      key = quote_key(key) unless bare_key? key
-
+      dotted_keys = key_value.split_keys.map { |key| bare_key?(key) ? key : quote_key(key) }.join('.')
 
       output.puts(header_comments(key_value))
 
-
-
-      output.puts "#{key} = #{value}#{" ##{key_value.inline_comment}" if key_value.inline_comment}"
+      output.puts "#{dotted_keys} = #{value}#{" ##{key_value.inline_comment}" if key_value.inline_comment}"
 
       output.string
     end

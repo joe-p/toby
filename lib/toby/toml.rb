@@ -31,11 +31,13 @@ module Toby
   end
 
   class TomlKeyValue
-    attr_reader :key
+    attr_reader :key, :split_keys
     attr_accessor :value, :table, :header_comments, :inline_comment
 
-    def initialize(key, value, inline_comment)
-      @key = key
+    def initialize(split_keys, value, inline_comment)
+      @split_keys = split_keys
+      @key = split_keys.join('.')
+
       @value = value
       @header_comments = []
       @inline_comment = inline_comment
