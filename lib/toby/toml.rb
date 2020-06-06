@@ -2,11 +2,12 @@
 
 module Toby
   class TomlTable
-    attr_reader :name
+    attr_reader :split_keys, :name
     attr_accessor :key_values, :header_comments, :inline_comment
 
-    def initialize(name, inline_comment, is_array_table)
-      @name = name
+    def initialize(split_keys, inline_comment, is_array_table)
+      @split_keys = split_keys
+      @name = split_keys&.join('.')
       @inline_comment = inline_comment
       @is_array_table = is_array_table
 
