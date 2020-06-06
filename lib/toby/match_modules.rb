@@ -55,7 +55,7 @@ module Toby
     module ArrayTable
       def toml_object
         Toby::TomlTable.new(
-          capture(:stripped_key).value.join('.'),
+          capture(:stripped_key).value,
           capture(:comment)&.stripped_comment,
           true
         )
