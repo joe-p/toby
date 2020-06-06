@@ -98,10 +98,6 @@ module Toby
       output_hash
     end
 
-    def header_comments
-      nil
-    end
-
     def inline_comment
       nil
     end
