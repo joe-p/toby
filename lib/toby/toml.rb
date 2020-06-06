@@ -5,12 +5,19 @@ module Toby
     attr_reader :name
     attr_accessor :key_values, :header_comments, :inline_comment
 
-    def initialize(name, inline_comment)
+    def initialize(name, inline_comment, is_array_table)
       @name = name
-      @header_comments = []
       @inline_comment = inline_comment
+      @is_array_table = is_array_table
+
+      @header_comments = []
       @key_values = []
     end
+
+    def array_table?
+      @is_array_table
+    end
+
   end
 
   class TomlKeyValue

@@ -6,7 +6,7 @@ grammar Toby::Document
   end
 
   rule table_array
-    (space? '[[' stripped_key ']]' comment?) {nil}
+    (space? '[[' stripped_key ']]' comment?) <Toby::Match::ArrayTable>
   end
 
   rule table

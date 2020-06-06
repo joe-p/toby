@@ -2,7 +2,6 @@
 
 module Toby
   module Match
-
     module Array
       def value
         capture(:array_elements).value
@@ -23,7 +22,18 @@ module Toby
       def toml_object
         Toby::TomlTable.new(
           capture(:stripped_key).value.join('.'),
-          capture(:comment)&.stripped_comment
+          capture(:comment)&.stripped_comment,
+          false
+        )
+      end
+    end
+
+    module ArrayTable
+      def toml_object
+        Toby::TomlTable.new(
+          capture(:stripped_key).value.join('.'),
+          capture(:comment)&.stripped_comment,
+          true
         )
       end
     end
