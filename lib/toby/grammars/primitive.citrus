@@ -38,19 +38,19 @@ grammar Toby::Primitive
   end
 
   rule offset_datetime
-    ( skeleton:datetime_skeleton ("Z" | date_offset) ) <Toby::OffsetDateTimeParser>
+    ( skeleton:datetime_skeleton ("Z" | date_offset) ) <Toby::Match::OffsetDateTime>
   end
 
   rule local_datetime
-    datetime_skeleton <Toby::LocalDateTimeParser>
+    datetime_skeleton <Toby::Match::LocalDateTime>
   end
 
   rule local_date
-    (date_skeleton space) <Toby::LocalDateParser>
+    (date_skeleton space) <Toby::Match::LocalDate>
   end
 
   rule local_time
-    (time_skeleton space) <Toby::LocalTimeParser>
+    (time_skeleton space) <Toby::Match::LocalTime>
   end
 
   rule datetime_skeleton
