@@ -38,6 +38,8 @@ module Toby
     attr_reader :tables
 
     def initialize(input_string)
+      super('', '', false)
+      
       @tables = [self]
       matches = Toby::Document.parse(input_string).matches
 
@@ -64,6 +66,7 @@ module Toby
         @tables << obj
 
       elsif obj.is_a? Toby::TomlKeyValue
+        binding.pry if @tables.last.key_values.nil?
         @tables.last.key_values << obj
 
       end
