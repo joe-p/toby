@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Toby
-
   class TomlTable
     attr_reader :name
     attr_accessor :key_values, :header_comments, :inline_comment
@@ -15,10 +14,19 @@ module Toby
       @key_values = []
     end
 
-    def array_table?
+    def is_array_table?
       @is_array_table
     end
 
+    def to_hash
+      output_hash = {}
+
+      key_values.each do |kv|
+        output_hash[kv.key] = kv.value
+      end
+
+      output_hash
+    end
   end
 
   class TomlKeyValue
@@ -38,8 +46,8 @@ module Toby
     attr_reader :tables
 
     def initialize(input_string)
-      super('', '', false)
-      
+      super(nil, '', false)
+
       @tables = [self]
       matches = Toby::Document.parse(input_string).matches
 
@@ -66,10 +74,28 @@ module Toby
         @tables << obj
 
       elsif obj.is_a? Toby::TomlKeyValue
-        binding.pry if @tables.last.key_values.nil?
         @tables.last.key_values << obj
 
       end
+    end
+
+    def to_hash
+      output_hash = {}
+
+      tables.each do |tbl|
+        if tbl.name.nil?
+          output_hash[nil] = super
+
+        elsif tbl.is_array_table?
+          output_hash[tbl.name] ||= []
+          output_hash[tbl.name] << tbl.to_hash
+
+        else
+          output_hash[tbl.name] = tbl.to_hash
+        end
+      end
+
+      output_hash
     end
 
     def header_comments
