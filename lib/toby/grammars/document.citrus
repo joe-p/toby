@@ -18,13 +18,7 @@ grammar Toby::Document
   end
 
   rule inline_table
-    (space? '{' (keyvalue? (',' keyvalue)*)? space? '}' ) {nil}
-  end
-
-  rule inline_table_array
-    (inline_table (space "," array_comments inline_table)*) {
-      captures[:inline_table].map(&:value).map(&:value)
-    }
+    (space? '{' (keyvalue? (',' keyvalue)*)? space? '}' ) <Toby::Match::InlineTable>
   end
 
   rule array_comments
@@ -35,15 +29,13 @@ grammar Toby::Document
     ("[" array_comments (array_elements)? space ","? array_comments "]" indent?) <Toby::Match::Array>
   end
 
-  rule array_elements
-    (primitive (space "," array_comments primitive)*) {
-      captures[:primitive].map(&:value)
-    }
+  rule array_element
+    primitive | inline_table | array
   end
 
-  rule array_array
-    (array (space "," array_comments array)*) {
-      captures[:array].map(&:value)
+  rule array_elements
+    (array_element (space "," array_comments array_element)*) {
+      captures[:array_element].map(&:value)
     }
   end
 

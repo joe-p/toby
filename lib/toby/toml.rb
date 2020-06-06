@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Toby
+
   class TomlTable
     attr_reader :name
     attr_accessor :key_values, :header_comments, :inline_comment

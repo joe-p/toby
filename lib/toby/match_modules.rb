@@ -2,6 +2,18 @@
 
 module Toby
   module Match
+    module InlineTable
+      def value
+        kv_hash = {}
+
+        captures(:keyvalue).each do |kv|
+          kv_hash[kv.key] = kv.value
+        end
+
+        kv_hash
+      end
+    end
+
     module Array
       def value
         capture(:array_elements).value
@@ -9,11 +21,23 @@ module Toby
     end
 
     module KeyValue
+      def key
+        capture(:stripped_key).value.first
+      end
+
+      def value
+        capture(:v).value
+      end
+
+      def comment
+        capture(:comment)&.stripped_comment
+      end
+
       def toml_object
         Toby::TomlKeyValue.new(
-          capture(:stripped_key).value.first,
-          capture(:v).value,
-          capture(:comment)&.stripped_comment
+          key,
+          value,
+          comment
         )
       end
     end
