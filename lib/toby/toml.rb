@@ -53,8 +53,6 @@ module Toby
       end
 
       if obj.is_a? Toby::TomlTable
-        unless @comment_buffer.empty?
-        end
         @tables << obj
 
       elsif obj.is_a? Toby::TomlKeyValue

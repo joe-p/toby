@@ -11,7 +11,6 @@ require_relative 'toby/match_modules'
 ROOT = File.dirname(File.expand_path(__FILE__))
 Citrus.load "#{ROOT}/toby/grammars/helper.citrus"
 Citrus.load "#{ROOT}/toby/grammars/primitive.citrus"
-Citrus.load "#{ROOT}/toby/grammars/array.citrus"
 Citrus.load "#{ROOT}/toby/grammars/document.citrus"
 
 module Toby; end

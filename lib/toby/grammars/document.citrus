@@ -1,6 +1,5 @@
 grammar Toby::Document
   include Toby::Primitive
-  include Toby::Arrays
 
   rule document
     (comment | table_array | table | keyvalue | line_break)*
@@ -28,12 +27,18 @@ grammar Toby::Document
     }
   end
 
+  rule array_comments
+    (indent? (comment indent?)*)
+  end
+
   rule array
-    ("[" array_comments (array_elements)? space ","? array_comments "]" indent?) {nil}
+    ("[" array_comments (array_elements)? space ","? array_comments "]" indent?) <Toby::Match::Array>
   end
 
   rule array_elements
-    inline_table_array | float_array | string_array | array_array | integer_array | datetime_array | bool_array
+    (primitive (space "," array_comments primitive)*) {
+      captures[:primitive].map(&:value)
+    }
   end
 
   rule array_array

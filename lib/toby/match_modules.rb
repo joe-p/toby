@@ -2,6 +2,13 @@
 
 module Toby
   module Match
+
+    module Array
+      def value
+        capture(:array_elements).value
+      end
+    end
+
     module KeyValue
       def toml_object
         Toby::TomlKeyValue.new(
