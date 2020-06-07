@@ -8,7 +8,7 @@ require_relative 'toby/string'
 require_relative 'toby/datetime'
 require_relative 'toby/match_modules'
 require_relative 'toby/dumper'
-
+require_relative 'toby/numbers'
 
 ROOT = File.dirname(File.expand_path(__FILE__))
 Citrus.load "#{ROOT}/toby/grammars/helper.citrus"

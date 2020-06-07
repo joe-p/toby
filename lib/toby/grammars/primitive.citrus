@@ -113,15 +113,15 @@ grammar Toby::Primitive
   end
 
   rule hexadecimal_integer
-    ('0x' [a-fA-F0-9_]+) { to_str.to_i(16) }
+    ('0x' [a-fA-F0-9_]+) <Toby::Match::Hexadecimal>
   end
 
   rule octal_integer
-    ('0o' [0-7_]+) { to_str.to_i(8) }
+    ('0o' [0-7_]+) <Toby::Match::Octal>
   end
 
   rule binary_integer
-    ('0b' [01_]+) { to_str.to_i(2) }
+    ('0b' [01_]+) <Toby::Match::Binary>
   end
 
   rule demical_integer
