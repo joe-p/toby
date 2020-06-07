@@ -4,13 +4,13 @@ module Toby
   module Match
     module InlineTable
       def value
-        kv_hash = {}
+        kv_array = []
 
         captures(:keyvalue).each do |kv|
-          kv_hash[kv.key] = kv.value
+          kv_array << Toby::TomlKeyValue.new(kv.keys, kv.value, nil)
         end
 
-        kv_hash
+        Toby::TomlInlineTable.new kv_array
       end
     end
 

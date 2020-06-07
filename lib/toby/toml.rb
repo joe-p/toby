@@ -1,6 +1,28 @@
 # frozen_string_literal: true
 
 module Toby
+  class TomlInlineTable < Array
+  
+    def dump
+      output = StringIO.new
+
+      output.print "{"
+
+      each do |kv|
+
+        dumped_value = kv.value.respond_to?(:dump) ? kv.value.dump : kv.value
+
+        dotted_keys = kv.split_keys.map { |key| kv.bare_key?(key) ? key : kv.quote_key(key) }.join('.')
+
+        output.print " #{dotted_keys} = #{dumped_value},"
+
+      end
+
+
+      output.string.gsub(/,$/, ' }')
+    end
+  end
+
   class TomlTable
     attr_reader :split_keys, :name
     attr_accessor :key_values, :header_comments, :inline_comment
@@ -79,7 +101,7 @@ module Toby
     def dump
       output = StringIO.new
 
-      dumped_value = value.is_a?(String) ? value.dump : value
+      dumped_value = value.respond_to?(:dump) ? value.dump : value
 
       dotted_keys = split_keys.map { |key| bare_key?(key) ? key : quote_key(key) }.join('.')
 
