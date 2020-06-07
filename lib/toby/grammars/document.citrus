@@ -40,7 +40,7 @@ grammar Toby::Document
   end
 
   rule toml_values
-    primitive | inline_table | array | inline_table_array
+    primitive | inline_table | array
   end
 
   rule stripped_key
