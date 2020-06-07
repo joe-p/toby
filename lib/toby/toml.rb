@@ -28,6 +28,38 @@ module Toby
 
       output_hash
     end
+
+    def dump
+      output = StringIO.new
+
+      dotted_keys = split_keys.map { |key| bare_key?(key) ? key : quote_key(key) }.join('.')
+
+      output.puts "\n#" + header_comments.join("\n#") unless header_comments.empty?
+
+      if is_array_table?
+        output.puts "[[#{dotted_keys}]]#{" ##{inline_comment}" if inline_comment}"
+      else
+        output.puts "[#{dotted_keys}]#{" ##{inline_comment}" if inline_comment}"
+      end
+
+      key_values.each do |kv|
+        output.puts kv.dump
+      end
+
+      output.string
+    end
+
+    # from toml-rb
+    # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
+    def bare_key?(key)
+      !!key.to_s.match(/^[a-zA-Z0-9_-]*$/)
+    end
+
+    # from toml-rb 
+    # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
+    def quote_key(key)
+      '"' + key.gsub('"', '\\"') + '"'
+    end
   end
 
   class TomlKeyValue
@@ -42,6 +74,32 @@ module Toby
       @header_comments = []
       @inline_comment = inline_comment
       @table = table
+    end
+
+    def dump
+      output = StringIO.new
+
+      dumped_value = value.is_a?(String) ? value.dump : value
+
+      dotted_keys = split_keys.map { |key| bare_key?(key) ? key : quote_key(key) }.join('.')
+
+      output.puts "\n#" + header_comments.join("\n#") unless header_comments.empty?
+
+      output.puts "#{dotted_keys} = #{dumped_value}#{" ##{inline_comment}" if inline_comment}"
+
+      output.string
+    end
+
+    # from toml-rb
+    # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
+    def bare_key?(key)
+      !!key.to_s.match(/^[a-zA-Z0-9_-]*$/)
+    end
+
+    # from toml-rb
+    # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
+    def quote_key(key)
+      '"' + key.gsub('"', '\\"') + '"'
     end
   end
 
@@ -99,6 +157,22 @@ module Toby
       end
 
       output_hash
+    end
+
+    def dump
+      output = StringIO.new
+
+      key_values.each do |kv|
+        output.puts kv.dump
+      end
+
+      tables.each do |table|
+        next if table.is_a? Toby::TOML
+
+        output.puts table.dump
+      end
+
+      output.string
     end
 
     def inline_comment
