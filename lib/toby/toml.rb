@@ -2,24 +2,30 @@
 
 module Toby
   class TomlInlineTable < Array
-  
     def dump
       output = StringIO.new
 
-      output.print "{"
+      output.print '{'
 
       each do |kv|
-
         dumped_value = kv.value.respond_to?(:dump) ? kv.value.dump : kv.value
 
         dotted_keys = kv.split_keys.map { |key| kv.bare_key?(key) ? key : kv.quote_key(key) }.join('.')
 
         output.print " #{dotted_keys} = #{dumped_value},"
-
       end
 
-
       output.string.gsub(/,$/, ' }')
+    end
+
+    def to_hash
+      output_hash = {}
+
+      each do |kv|
+        output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+      end
+
+      output_hash
     end
   end
 
@@ -45,7 +51,7 @@ module Toby
       output_hash = {}
 
       key_values.each do |kv|
-        output_hash[kv.key] = kv.value
+        output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
       end
 
       output_hash
@@ -77,7 +83,7 @@ module Toby
       !!key.to_s.match(/^[a-zA-Z0-9_-]*$/)
     end
 
-    # from toml-rb 
+    # from toml-rb
     # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
     def quote_key(key)
       '"' + key.gsub('"', '\\"') + '"'
