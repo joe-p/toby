@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'citrus'
-require 'pry'
+require 'delegate'
 
 require_relative 'toby/toml'
 require_relative 'toby/string'
