@@ -16,6 +16,18 @@ module Toby
 
       output.string
     end
+
+    def to_hash
+      h = self.map do |obj| 
+        if obj.respond_to?(:value) 
+          obj.value
+        elsif obj.respond_to?(:to_hash)
+          obj.to_hash
+        else
+          obj
+        end
+      end
+    end
   end
 
   class TomlInlineTable < Array
