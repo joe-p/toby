@@ -6,7 +6,7 @@ name = "Tom Preston-Werner"
 dob = 1979-05-27T07:32:00-0800 #First class dates
 [database]
 server = "192.168.1.1"
-ports = [8001, 8001, 8002]
+ports = [ 8001, 8001, 8002 ]
 connection_max = 5000
 enabled = true
 [servers]
@@ -19,8 +19,8 @@ dc = "eqdc10"
 ip = "10.0.0.2"
 dc = "eqdc10"
 [clients]
-data = [["gamma", "delta"], [1, 2]] #Line breaks are OK when inside arrays
-hosts = ["alpha", "omega"]
+data = [ [ "gamma", "delta" ], [ 1, 2 ] ] #Line breaks are OK when inside arrays
+hosts = [ "alpha", "omega" ]
 str_multiline = "Roses are red\nViolets are blue"
 str_quoted = "I'm a string. \"You can quote me\". Name\tJos\u00E9\nLocation\tSF."
 str2 = "The quick brown fox jumps over the lazy dog."
@@ -46,4 +46,4 @@ name = "granny smith"
 name = "banana"
 [[fruit.variety]]
 name = "plantain"
-points = [{ x = 1, y = 2, z = 3 }, { x = 7, y = 8, z = 9 }, { x = 2, y = 4, z = 8 }]
+points = [ { x = 1, y = 2, z = 3 }, { x = 7, y = 8, z = 9 }, { x = 2, y = 4, z = 8 } ]
