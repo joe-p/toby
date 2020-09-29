@@ -16,7 +16,7 @@ module Toby
 
     module Array
       def value
-        capture(:array_elements).value
+        Toby::TomlArray.new capture(:array_elements).value
       end
     end
 

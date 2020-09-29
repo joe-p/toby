@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
 module Toby
+  class TomlArray < Array
+    def dump
+      output = StringIO.new
+
+      output.print '[ '
+
+      dumped_array = self.map do |val|
+        val = val.respond_to?(:dump) ? val.dump : val
+      end
+
+      output.print dumped_array.join(', ')
+      output.print ' ]'
+
+      output.string
+    end
+  end
+
   class TomlInlineTable < Array
     def dump
       output = StringIO.new

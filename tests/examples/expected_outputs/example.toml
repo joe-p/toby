@@ -8,7 +8,7 @@ bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
 dob = 1979-05-27T07:32:00+0000 #First class dates? Why not?
 [database]
 server = "192.168.1.1"
-ports = [8001, 8001, 8002]
+ports = [ 8001, 8001, 8002 ]
 connection_max = 5000
 enabled = true
 [servers]
@@ -22,10 +22,10 @@ ip = "10.0.0.2"
 dc = "eqdc10"
 country = "\u4E2D\u56FD" #This should be parsed as UTF-8
 [clients]
-data = [["gamma", "delta"], [1, 2]] #just an update to make sure parsers support it
+data = [ [ "gamma", "delta" ], [ 1, 2 ] ] #just an update to make sure parsers support it
 
 #Line breaks are OK when inside arrays
-hosts = ["alpha", "omega"] #Products
+hosts = [ "alpha", "omega" ] #Products
 [[products]]
 name = "Hammer"
 sku = 738594937
