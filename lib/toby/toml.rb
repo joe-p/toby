@@ -87,7 +87,24 @@ module Toby
     end
 
     def to_expanded_hash
-      to_hash
+      output_hash = {}
+
+      key_values.each do |kv|
+        last_hash = output_hash
+
+        kv.split_keys.each_with_index do |key, i|
+          
+          if i < (kv.split_keys.size - 1) # not the last key
+            last_hash[key] ||= {}
+            last_hash = last_hash[key]
+          else
+            last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+          end
+        end
+
+      end
+
+      output_hash
     end
 
     def dump
