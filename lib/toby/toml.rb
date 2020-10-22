@@ -202,7 +202,7 @@ module Toby
 
       tables.each do |tbl|
         if tbl.name.nil?
-          output_hash[nil] = super
+          output_hash = super
 
         elsif tbl.is_array_table?
           output_hash[tbl.name] ||= []
