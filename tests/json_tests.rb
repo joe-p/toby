@@ -7,11 +7,7 @@ class JsonTests < Minitest::Test
     def json_test(file_name)
         expected_output = File.read("./examples/expected_outputs/spec_json/#{file_name}.json")
         input_file = File.read("./examples/spec_json/#{file_name}.toml")
-
-        puts file_name
-        puts "Got: " + JSON.parse(Toby::TOML.new(input_file).to_json).to_s
-        puts "Expected: " + JSON.parse(expected_output).to_s
-
+        
         assert JSON.parse(Toby::TOML.new(input_file).to_json) == JSON.parse(expected_output)
     end
 
