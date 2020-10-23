@@ -3,6 +3,7 @@
 require 'citrus'
 require 'delegate'
 require 'stringio'
+require 'json'
 
 require_relative 'toby/toml'
 require_relative 'toby/string'
