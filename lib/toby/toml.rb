@@ -304,6 +304,10 @@ module Toby
       output.string
     end
 
+    def to_json
+      to_expanded_hash.to_json
+    end
+
     def inline_comment
       nil
     end
