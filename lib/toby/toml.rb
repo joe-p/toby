@@ -254,15 +254,16 @@ module Toby
             else
               if last_hash.is_a? Array
                 last_hash.last[key] ||= []
-                last_hash.last[key] << tbl.to_hash
+                last_hash.last[key] << tbl.to_expanded_hash
               else
                 last_hash[key] ||= []
-                last_hash[key] << tbl.to_hash
+                last_hash[key] << tbl.to_expanded_hash
               end
             end
           end
 
         else
+
           last_hash = output_hash
           last_last_hash = nil
           last_key = nil
@@ -277,7 +278,7 @@ module Toby
               if last_hash.is_a? Array
                 last_last_hash.last[key] = tbl.to_hash
               else
-                last_hash[key] = tbl.to_hash
+                last_hash[key] = tbl.to_expanded_hash
               end
             end
 
