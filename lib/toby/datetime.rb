@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Toby
+module Toby::Parser
   class OffsetDateTime < Time
     def to_s
       strftime('%Y-%m-%dT%H:%M:%S%z')
@@ -33,7 +33,7 @@ module Toby
         offset = captures[:date_offset].first || '+00:00'
         sec = "#{sec}.#{sec_frac}".to_f
 
-        Toby::OffsetDateTime.new(year, mon, day, hour, min, sec, offset.to_s)
+        Toby::Parser::OffsetDateTime.new(year, mon, day, hour, min, sec, offset.to_s)
       end
     end
 
@@ -50,7 +50,7 @@ module Toby
     module LocalDate
       def value
         year, mon, day = captures[:date_skeleton].first.value
-        Toby::LocalDate.local(year, mon, day)
+        Toby::Parser::LocalDate.local(year, mon, day)
       end
     end
 
@@ -59,7 +59,7 @@ module Toby
         hour, min, sec, sec_frac = captures[:time_skeleton].first.value
         usec = sec_frac.to_s.ljust(6, '0')
 
-        Toby::LocalTime.at(3600 * hour.to_i + 60 * min.to_i + sec.to_i, usec.to_i)
+        Toby::Parser::LocalTime.at(3600 * hour.to_i + 60 * min.to_i + sec.to_i, usec.to_i)
       end
     end
   end

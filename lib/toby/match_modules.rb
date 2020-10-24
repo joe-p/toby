@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Toby
+module Toby::Parser
   module Match
     module InlineTable
       def value

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Toby
+module Toby::Parser
   class Hexadecimal < DelegateClass(Integer)
 
     def to_s
@@ -40,19 +40,19 @@ module Toby
   module Match
     module Hexadecimal
       def value
-        Toby::Hexadecimal.new(to_str.to_i(16))
+        Toby::Parser::Hexadecimal.new(to_str.to_i(16))
       end
     end
 
     module Binary
       def value
-        Toby::Binary.new(to_str.to_i(2))
+        Toby::Parser::Binary.new(to_str.to_i(2))
       end
     end
 
     module Octal
       def value
-        Toby::Octal.new(to_str.to_i(8))
+        Toby::Parser::Octal.new(to_str.to_i(8))
       end
     end
   end

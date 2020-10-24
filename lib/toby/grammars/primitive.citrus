@@ -14,19 +14,19 @@ grammar Toby::Primitive
   end
 
   rule basic_string
-    (/(["])(?:\\?.)*?\1/ space) <Toby::BasicString>
+    (/(["])(?:\\?.)*?\1/ space) <Toby::Parser::BasicString>
   end
 
   rule literal_string
-    (/(['])(?:\\?.)*?\1/ space) <Toby::LiteralString>
+    (/(['])(?:\\?.)*?\1/ space) <Toby::Parser::LiteralString>
   end
 
   rule multiline_string
-    ('"""' line_break* (text:~('"""' !'"')|'') '"""' space) <Toby::MultilineString>
+    ('"""' line_break* (text:~('"""' !'"')|'') '"""' space) <Toby::Parser::MultilineString>
   end
 
   rule multiline_literal
-    ("'''" line_break* (text:~("'''" !"'")|'') "'''" space) <Toby::MultilineLiteral>
+    ("'''" line_break* (text:~("'''" !"'")|'') "'''" space) <Toby::Parser::MultilineLiteral>
   end
 
   ##
@@ -38,19 +38,19 @@ grammar Toby::Primitive
   end
 
   rule offset_datetime
-    ( skeleton:datetime_skeleton ("Z" | date_offset) ) <Toby::Match::OffsetDateTime>
+    ( skeleton:datetime_skeleton ("Z" | date_offset) ) <Toby::Parser::Match::OffsetDateTime>
   end
 
   rule local_datetime
-    datetime_skeleton <Toby::Match::LocalDateTime>
+    datetime_skeleton <Toby::Parser::Match::LocalDateTime>
   end
 
   rule local_date
-    (date_skeleton space) <Toby::Match::LocalDate>
+    (date_skeleton space) <Toby::Parser::Match::LocalDate>
   end
 
   rule local_time
-    (time_skeleton space) <Toby::Match::LocalTime>
+    (time_skeleton space) <Toby::Parser::Match::LocalTime>
   end
 
   rule datetime_skeleton
@@ -113,15 +113,15 @@ grammar Toby::Primitive
   end
 
   rule hexadecimal_integer
-    ('0x' [a-fA-F0-9_]+) <Toby::Match::Hexadecimal>
+    ('0x' [a-fA-F0-9_]+) <Toby::Parser::Match::Hexadecimal>
   end
 
   rule octal_integer
-    ('0o' [0-7_]+) <Toby::Match::Octal>
+    ('0o' [0-7_]+) <Toby::Parser::Match::Octal>
   end
 
   rule binary_integer
-    ('0b' [01_]+) <Toby::Match::Binary>
+    ('0b' [01_]+) <Toby::Parser::Match::Binary>
   end
 
   rule demical_integer
