@@ -16,35 +16,12 @@ class Toby::TomlTable
       @is_array_table
     end
 
-    def to_hash
-      output_hash = {}
-
-      key_values.each do |kv|
-        output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
-      end
-
-      output_hash
-    end
-
-    def to_expanded_hash
-      output_hash = {}
-
-      key_values.each do |kv|
-        last_hash = output_hash
-
-        kv.split_keys.each_with_index do |key, i|
-          
-          if i < (kv.split_keys.size - 1) # not the last key
-            last_hash[key] ||= {}
-            last_hash = last_hash[key]
-          else
-            last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
-          end
+    def to_hash(options = {})
+        if options[:dotted_keys]
+            to_dotted_keys_hash
+        else
+            to_split_keys_hash
         end
-
-      end
-
-      output_hash
     end
 
     def dump
@@ -78,4 +55,38 @@ class Toby::TomlTable
     def quote_key(key)
       '"' + key.gsub('"', '\\"') + '"'
     end
+
+    private
+
+    def to_dotted_keys_hash
+        output_hash = {}
+  
+        key_values.each do |kv|
+          output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+        end
+  
+        output_hash
+      end
+  
+      def to_split_keys_hash
+        output_hash = {}
+  
+        key_values.each do |kv|
+          last_hash = output_hash
+  
+          kv.split_keys.each_with_index do |key, i|
+            
+            if i < (kv.split_keys.size - 1) # not the last key
+              last_hash[key] ||= {}
+              last_hash = last_hash[key]
+            else
+              last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+            end
+          end
+  
+        end
+  
+        output_hash
+      end
+  
   end
