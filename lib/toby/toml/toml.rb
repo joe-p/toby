@@ -1,4 +1,4 @@
-class Toby::TOML < Toby::TomlTable
+class Toby::TOML::TOMLFile < Toby::TOML::Table
     attr_reader :tables
 
     def initialize(input_string)
@@ -26,10 +26,10 @@ class Toby::TOML < Toby::TomlTable
         @comment_buffer = []
       end
 
-      if obj.is_a? Toby::TomlTable
+      if obj.is_a? Toby::TOML::Table
         @tables << obj
 
-      elsif obj.is_a? Toby::TomlKeyValue
+      elsif obj.is_a? Toby::TOML::KeyValue
         @tables.last.key_values << obj
 
       end
@@ -51,7 +51,7 @@ class Toby::TOML < Toby::TomlTable
       end
 
       tables.each do |table|
-        next if table.is_a? Toby::TOML
+        next if table.is_a? Toby::TOML::TOMLFile
 
         output.puts table.dump
       end

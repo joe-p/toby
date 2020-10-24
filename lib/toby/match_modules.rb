@@ -7,16 +7,16 @@ module Toby
         kv_array = []
 
         captures(:keyvalue).each do |kv|
-          kv_array << Toby::TomlKeyValue.new(kv.keys, kv.value, nil)
+          kv_array << Toby::TOML::KeyValue.new(kv.keys, kv.value, nil)
         end
 
-        Toby::TomlInlineTable.new kv_array
+        Toby::TOML::InlineTable.new kv_array
       end
     end
 
     module Array
       def value
-        Toby::TomlArray.new capture(:array_elements).value
+        Toby::TOML::Array.new capture(:array_elements).value
       end
     end
 
@@ -34,7 +34,7 @@ module Toby
       end
 
       def toml_object
-        Toby::TomlKeyValue.new(
+        Toby::TOML::KeyValue.new(
           keys,
           value,
           comment
@@ -44,7 +44,7 @@ module Toby
 
     module Table
       def toml_object
-        Toby::TomlTable.new(
+        Toby::TOML::Table.new(
           capture(:stripped_key).value,
           capture(:comment)&.stripped_comment,
           false
@@ -54,7 +54,7 @@ module Toby
 
     module ArrayTable
       def toml_object
-        Toby::TomlTable.new(
+        Toby::TOML::Table.new(
           capture(:stripped_key).value,
           capture(:comment)&.stripped_comment,
           true

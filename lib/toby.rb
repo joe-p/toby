@@ -5,7 +5,11 @@ require 'delegate'
 require 'stringio'
 require 'json'
 
+# Module containing all of the code for the Toby gem.
 module Toby; end
+
+# Module containing all of code for TOML objects
+module Toby::TOML; end
 
 require_relative 'toby/toml/array'
 require_relative 'toby/toml/inline_table'

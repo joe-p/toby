@@ -8,7 +8,7 @@ class DumpTests < Minitest::Test
         expected_output = File.read("./examples/expected_outputs/#{file_name}.toml")
         input_file = File.read("./examples/#{file_name}.toml")
 
-        assert Toby::TOML.new(input_file).dump == expected_output
+        assert Toby::TOML::TOMLFile.new(input_file).dump == expected_output
     end
 
     def test_0_5_0_dump

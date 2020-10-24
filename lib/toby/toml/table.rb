@@ -1,4 +1,4 @@
-class Toby::TomlTable
+class Toby::TOML::Table
     attr_reader :split_keys, :name
     attr_accessor :key_values, :header_comments, :inline_comment
 

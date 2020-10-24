@@ -1,4 +1,4 @@
-class Toby::TomlInlineTable < Array
+class Toby::TOML::InlineTable < Array
     def dump
       output = StringIO.new
 

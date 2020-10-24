@@ -1,4 +1,4 @@
-class Toby::TomlArray < Array
+class Toby::TOML::Array < ::Array
     def dump
       output = StringIO.new
 
