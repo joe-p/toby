@@ -4,5 +4,6 @@ source 'https://rubygems.org' do
     group :dev do
         gem 'pry'
         gem 'minitest'
+        gem 'yard'
     end
 end
