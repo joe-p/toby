@@ -21,10 +21,10 @@ require_relative 'toby/toml/key_value'
 require_relative 'toby/toml/table'
 require_relative 'toby/toml/toml'
 
-require_relative 'toby/string'
-require_relative 'toby/datetime'
-require_relative 'toby/match_modules'
-require_relative 'toby/numbers'
+require_relative 'toby/parser/string'
+require_relative 'toby/parser/datetime'
+require_relative 'toby/parser/match_modules'
+require_relative 'toby/parser/numbers'
 
 ROOT = File.dirname(File.expand_path(__FILE__))
 Citrus.load "#{ROOT}/toby/grammars/helper.citrus"
