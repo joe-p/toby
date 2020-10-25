@@ -19,12 +19,56 @@ class Toby::TOML::InlineTable < Array
       output.string.gsub(/,$/, ' }')
     end
 
-    # @return [Hash] Returns the value of KeyValue#value.to_hash or simply KeyValue#value in a Hash
-    def to_hash
+    # @return [Hash] TOML table represented as a hash.
+    # @option options [TrueClass, FalseClass]  :dotted_keys (false) If true, dotted keys are not expanded/nested.
+    # @example
+    #   Given the following TOML:
+    #   table = {a.b.c = 123}
+    #
+    #   #to_hash returns { "table" => {"a" => { "b" => { "c" => 123 } } } }
+    #   #to_hash(dotted_keys: true) returns {'some.dotted.keys' => {'some.value'} => 123}
+    def to_hash(options = {})
+      if options[:dotted_keys]
+          to_dotted_keys_hash
+      else
+          to_split_keys_hash
+      end
+    end
+
+    private 
+
+    # @api private
+    def to_split_keys_hash
+      output_hash = {}
+
+      last_hash = output_hash
+      last_last_hash = nil
+      last_key = nil
+
+      each do |kv|
+        kv.split_keys.each_with_index do |key, i|
+          last_last_hash = last_hash
+
+          if i < (kv.split_keys.size - 1) # not the last key
+            last_hash[key] ||= {} 
+            last_last_hash = last_hash
+            last_hash = last_hash[key]
+          else
+            last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash(options) : kv.value
+          end
+
+        end
+      end
+
+      output_hash
+    end
+
+    # @api private
+    def to_dotted_keys_hash
       output_hash = {}
 
       each do |kv|
-        output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+        output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash(options) : kv.value
       end
 
       output_hash

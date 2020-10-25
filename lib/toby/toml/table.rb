@@ -46,9 +46,9 @@ class Toby::TOML::Table
     #   #to_hash(dotted_keys: true) returns in {'some.dotted.keys' => {'some.value'} => 123}
     def to_hash(options = {})
         if options[:dotted_keys]
-            to_dotted_keys_hash
+            to_dotted_keys_hash(options)
         else
-            to_split_keys_hash
+            to_split_keys_hash(options)
         end
     end
 
@@ -90,18 +90,18 @@ class Toby::TOML::Table
     private
 
     # @api private
-    def to_dotted_keys_hash
+    def to_dotted_keys_hash(options)
         output_hash = {}
   
         key_values.each do |kv|
-          output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+          output_hash[kv.key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash(options) : kv.value
         end
   
         output_hash
       end
   
       # @api private
-      def to_split_keys_hash
+      def to_split_keys_hash(options)
         output_hash = {}
   
         key_values.each do |kv|
@@ -113,7 +113,7 @@ class Toby::TOML::Table
               last_hash[key] ||= {}
               last_hash = last_hash[key]
             else
-              last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash : kv.value
+              last_hash[key] = kv.value.respond_to?(:to_hash) ? kv.value.to_hash(options) : kv.value
             end
           end
   
