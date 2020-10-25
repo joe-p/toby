@@ -26,6 +26,7 @@ require_relative 'toby/parser/datetime'
 require_relative 'toby/parser/match_modules'
 require_relative 'toby/parser/numbers'
 
+# The root directory of Toby
 ROOT = File.dirname(File.expand_path(__FILE__))
 Citrus.load "#{ROOT}/toby/grammars/helper.citrus"
 Citrus.load "#{ROOT}/toby/grammars/primitive.citrus"

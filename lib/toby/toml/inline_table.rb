@@ -1,4 +1,8 @@
+# Represents an inline-table value
+# @see https://toml.io/en/v1.0.0-rc.3#inline-table
 class Toby::TOML::InlineTable < Array
+    
+    # @return [String] Inline table in valid TOML format
     def dump
       output = StringIO.new
 
@@ -15,6 +19,7 @@ class Toby::TOML::InlineTable < Array
       output.string.gsub(/,$/, ' }')
     end
 
+    # @return [Hash] Returns the value of KeyValue#value.to_hash or simply KeyValue#value in a Hash
     def to_hash
       output_hash = {}
 

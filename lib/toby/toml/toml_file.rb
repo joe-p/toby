@@ -1,6 +1,10 @@
+# Represents an entire TOML file
+# @see https://toml.io/en/v1.0.0-rc.3
 class Toby::TOML::TOMLFile < Toby::TOML::Table
+    # @return [Array<Toby::TOML::Table>] The tables in the TOML file
     attr_reader :tables
 
+    # @param input_string [String] The TOML file to parse.
     def initialize(input_string)
       super(nil, '', false)
 
@@ -20,21 +24,15 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
       end
     end
 
-    def toml_object_handler(obj)
-      if obj.respond_to?(:header_comments) && !@comment_buffer.empty?
-        obj.header_comments = @comment_buffer
-        @comment_buffer = []
-      end
-
-      if obj.is_a? Toby::TOML::Table
-        @tables << obj
-
-      elsif obj.is_a? Toby::TOML::KeyValue
-        @tables.last.key_values << obj
-
-      end
-    end
-
+    # @return [Hash] TOML table represented as a hash.
+    # @option options [TrueClass, FalseClass]  :dotted_keys (false) If true, dotted keys are not expanded/nested.
+    # @example
+    #   Given the following TOML:
+    #   [some.dotted.keys]
+    #   some.value = 123
+    #
+    #   #to_hash returns {'some' => {'dotted' => {'keys' => {'some' => {'value' => 123} } } } } } 
+    #   #to_hash(dotted_keys: true) returns {'some.dotted.keys' => {'some.value'} => 123}
     def to_hash(options = {})
         if options[:dotted_keys]
             to_dotted_keys_hash
@@ -43,6 +41,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
         end
     end
 
+    # @return [String] The entire TOML file in valid TOML format.
     def dump
       output = StringIO.new
 
@@ -59,16 +58,19 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
       output.string
     end
 
+    # @return [String] The TOML file in valid JSON in accordance with the TOML spec
     def to_json
       to_hash.to_json
     end
 
+    # @return [NilClass] A file can't have an inline comment, so this will always return nil
     def inline_comment
       nil
     end
 
     private
 
+    # @api private
     def to_dotted_keys_hash
         output_hash = {}
   
@@ -88,6 +90,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
         output_hash
       end
   
+      # @api private
       def to_split_keys_hash
         output_hash = {}
   
@@ -138,6 +141,24 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
         end
   
         output_hash
+      end
+
+      private
+
+      # @api private
+      def toml_object_handler(obj)
+        if obj.respond_to?(:header_comments) && !@comment_buffer.empty?
+          obj.header_comments = @comment_buffer
+          @comment_buffer = []
+        end
+  
+        if obj.is_a? Toby::TOML::Table
+          @tables << obj
+  
+        elsif obj.is_a? Toby::TOML::KeyValue
+          @tables.last.key_values << obj
+  
+        end
       end
   
   end
