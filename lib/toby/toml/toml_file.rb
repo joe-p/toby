@@ -35,9 +35,9 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
     #   #to_hash(dotted_keys: true) returns {'some.dotted.keys' => {'some.value'} => 123}
     def to_hash(options = {})
         if options[:dotted_keys]
-            to_dotted_keys_hash
+            to_dotted_keys_hash(options)
         else
-            to_split_keys_hash
+            to_split_keys_hash(options)
         end
     end
 
@@ -71,7 +71,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
     private
 
     # @api private
-    def to_dotted_keys_hash
+    def to_dotted_keys_hash(options)
         output_hash = {}
   
         tables.each do |tbl|
@@ -80,10 +80,10 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
   
           elsif tbl.is_array_table?
             output_hash[tbl.name] ||= []
-            output_hash[tbl.name] << tbl.to_hash
+            output_hash[tbl.name] << tbl.to_hash(options)
   
           else
-            output_hash[tbl.name] = tbl.to_hash
+            output_hash[tbl.name] = tbl.to_hash(options)
           end
         end
   
@@ -91,7 +91,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
       end
   
       # @api private
-      def to_split_keys_hash
+      def to_split_keys_hash(options)
         output_hash = {}
   
         tables.each do |tbl|
@@ -108,10 +108,10 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
               else
                 if last_hash.is_a? Array
                   last_hash.last[key] ||= []
-                  last_hash.last[key] << tbl.to_hash
+                  last_hash.last[key] << tbl.to_hash(options)
                 else
                   last_hash[key] ||= []
-                  last_hash[key] << tbl.to_hash
+                  last_hash[key] << tbl.to_hash(options)
                 end
               end
             end
@@ -130,9 +130,9 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
                 last_hash = last_hash[key]
               else
                 if last_hash.is_a? Array
-                  last_last_hash.last[key] = tbl.to_hash
+                  last_last_hash.last[key] = tbl.to_hash(options)
                 else
-                  last_hash[key] = tbl.to_hash
+                  last_hash[key] = tbl.to_hash(options)
                 end
               end
   
