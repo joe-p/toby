@@ -5,7 +5,7 @@ require_relative '../lib/toby.rb'
 
 class InstantiationTests < Minitest::Test
     def instantiation_test(file_name)
-        Toby::TOML.new(File.read("./examples/#{file_name}.toml"))
+        Toby::TOML::TOMLFile.new(File.read("./examples/#{file_name}.toml"))
     end
 
     def test_0_5_0_instantiation
