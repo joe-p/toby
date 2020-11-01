@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # Represents an inline-table value
 # @see https://toml.io/en/v1.0.0-rc.3#inline-table
 class Toby::TOML::InlineTable < Array

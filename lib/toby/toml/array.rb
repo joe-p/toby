@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # Represents an array value
 # @see https://toml.io/en/v1.0.0-rc.3#array
 class Toby::TOML::Array < ::Array

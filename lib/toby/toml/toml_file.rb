@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # Represents an entire TOML file
 # @see https://toml.io/en/v1.0.0-rc.3
 class Toby::TOML::TOMLFile < Toby::TOML::Table

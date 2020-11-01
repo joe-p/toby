@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # Represents a TOML table
 # @see https://toml.io/en/v1.0.0-rc.3#table
 # @see https://toml.io/en/v1.0.0-rc.3#array-of-tables

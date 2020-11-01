@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # Represents a TOML key-value pair
 # @see https://toml.io/en/v1.0.0-rc.3#keyvalue-pair
 class Toby::TOML::KeyValue
