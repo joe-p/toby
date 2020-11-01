@@ -69,4 +69,4 @@ module Toby::Parser
       aux.gsub(/\\\r?\n[\n\t\r ]*/, '')
     end
   end
-  end
+end

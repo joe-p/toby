@@ -2,7 +2,6 @@
 
 module Toby::Parser
   class Hexadecimal < DelegateClass(Integer)
-
     def to_s
       hex = to_i.to_s(16)
       "0x#{hex}"
@@ -14,7 +13,6 @@ module Toby::Parser
   end
 
   class Binary < DelegateClass(Integer)
-
     def to_s
       binary = to_i.to_s(2)
       "0b#{binary}"
@@ -26,7 +24,6 @@ module Toby::Parser
   end
 
   class Octal < DelegateClass(Integer)
-
     def to_s
       octal = to_i.to_s(8)
       "0b#{octal}"

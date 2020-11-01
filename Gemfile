@@ -1,9 +1,9 @@
 source 'https://rubygems.org' do
-    gem 'citrus'
+  gem 'citrus'
 
-    group :dev do
-        gem 'pry'
-        gem 'minitest'
-        gem 'yard'
-    end
+  group :dev do
+    gem 'minitest'
+    gem 'pry'
+    gem 'yard'
+  end
 end

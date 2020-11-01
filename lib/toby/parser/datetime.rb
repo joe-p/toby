@@ -7,7 +7,7 @@ module Toby::Parser
     end
   end
 
-  class LocalDateTime < Time 
+  class LocalDateTime < Time
     def to_s
       strftime('%Y-%m-%dT%H:%M:%S')
     end
