@@ -35,10 +35,6 @@ class DumpTests < Minitest::Test
         dump_test('preserve_quotes_in_string')
     end
 
-    def test_hard_dump
-        dump_test('hard')
-    end
-
     def test_string_slash_whitespace_newline_dump
         dump_test('string_slash_whitespace_newline')
     end
