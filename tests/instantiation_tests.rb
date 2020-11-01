@@ -20,10 +20,6 @@ class InstantiationTests < Minitest::Test
         instantiation_test('fruit')
     end
 
-    def test_hard_instantiation
-        instantiation_test('hard')
-    end
-
     def test_newline_in_strings_instantiation
         instantiation_test('newline_in_strings')
     end
