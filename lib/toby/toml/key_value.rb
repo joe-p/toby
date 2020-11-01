@@ -58,6 +58,6 @@ class Toby::TOML::KeyValue
     # from toml-rb
     # https://github.com/emancu/toml-rb/blob/ca5bf9563f1ef2c467bd43eec1d035e83b61ac88/lib/toml-rb/dumper.rb
     def quote_key(key)
-      '"' + key.gsub('"', '\\"') + '"'
+      "\"#{key.gsub('"', '\\"')}\""
     end
   end
