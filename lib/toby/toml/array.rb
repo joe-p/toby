@@ -12,7 +12,7 @@ module Toby
         output.print '[ '
 
         dumped_array = map do |val|
-          val = val.respond_to?(:dump) ? val.dump : val
+          val.respond_to?(:dump) ? val.dump : val
         end
 
         output.print dumped_array.join(', ')

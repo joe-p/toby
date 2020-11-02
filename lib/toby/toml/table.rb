@@ -35,7 +35,7 @@ module Toby
       end
 
       # @return [TrueClass, FalseClass] Whether the table is an array-table or not
-      def is_array_table?
+      def array_table?
         @is_array_table
       end
 
@@ -64,7 +64,7 @@ module Toby
 
         output.puts "\n##{header_comments.join("\n#")}" unless header_comments.empty?
 
-        if is_array_table?
+        if array_table?
           output.puts "[[#{dotted_keys}]]#{" ##{inline_comment}" if inline_comment}"
         else
           output.puts "[#{dotted_keys}]#{" ##{inline_comment}" if inline_comment}"

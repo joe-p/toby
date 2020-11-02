@@ -82,7 +82,7 @@ module Toby
           if tbl.name.nil?
             output_hash = super
 
-          elsif tbl.is_array_table?
+          elsif tbl.array_table?
             output_hash[tbl.name] ||= []
             output_hash[tbl.name] << tbl.to_hash(options)
 
@@ -102,21 +102,19 @@ module Toby
           if tbl.name.nil?
             output_hash = super
 
-          elsif tbl.is_array_table?
+          elsif tbl.array_table?
             last_hash = output_hash
 
             tbl.split_keys.each_with_index do |key, i|
               if i < (tbl.split_keys.size - 1) # not the last key
                 last_hash[key] ||= {}
                 last_hash = last_hash[key]
+              elsif last_hash.is_a? ::Array
+                last_hash.last[key] ||= []
+                last_hash.last[key] << tbl.to_hash(options)
               else
-                if last_hash.is_a? ::Array
-                  last_hash.last[key] ||= []
-                  last_hash.last[key] << tbl.to_hash(options)
-                else
-                  last_hash[key] ||= []
-                  last_hash[key] << tbl.to_hash(options)
-                end
+                last_hash[key] ||= []
+                last_hash[key] << tbl.to_hash(options)
               end
             end
 
@@ -124,7 +122,6 @@ module Toby
 
             last_hash = output_hash
             last_last_hash = nil
-            last_key = nil
 
             tbl.split_keys.each_with_index do |key, i|
               last_last_hash = last_hash
@@ -132,12 +129,10 @@ module Toby
                 last_hash[key] ||= {}
                 last_last_hash = last_hash
                 last_hash = last_hash[key]
+              elsif last_hash.is_a? ::Array
+                last_last_hash.last[key] = tbl.to_hash(options)
               else
-                if last_hash.is_a? ::Array
-                  last_last_hash.last[key] = tbl.to_hash(options)
-                else
-                  last_hash[key] = tbl.to_hash(options)
-                end
+                last_hash[key] = tbl.to_hash(options)
               end
             end
           end

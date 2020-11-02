@@ -46,7 +46,6 @@ module Toby
 
         last_hash = output_hash
         last_last_hash = nil
-        last_key = nil
 
         each do |kv|
           kv.split_keys.each_with_index do |key, i|

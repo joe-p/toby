@@ -37,8 +37,8 @@ module Toby
         end
       end
 
-      def self.parse_error(m)
-        raise ParseError, "Escape sequence #{m} is reserved"
+      def self.parse_error(sequence)
+        raise ParseError, "Escape sequence #{sequence} is reserved"
       end
     end
 
