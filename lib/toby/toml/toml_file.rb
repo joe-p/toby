@@ -108,7 +108,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
             last_hash[key] ||= {}
             last_hash = last_hash[key]
           else
-            if last_hash.is_a? Array
+            if last_hash.is_a? ::Array
               last_hash.last[key] ||= []
               last_hash.last[key] << tbl.to_hash(options)
             else
@@ -131,7 +131,7 @@ class Toby::TOML::TOMLFile < Toby::TOML::Table
             last_last_hash = last_hash
             last_hash = last_hash[key]
           else
-            if last_hash.is_a? Array
+            if last_hash.is_a? ::Array
               last_last_hash.last[key] = tbl.to_hash(options)
             else
               last_hash[key] = tbl.to_hash(options)
