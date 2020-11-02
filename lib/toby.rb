@@ -9,11 +9,15 @@ require 'json'
 module Toby; end
 
 # Contains all of code for TOML objects.
-module Toby::TOML; end
+module Toby
+  module TOML; end
+end
 
 # Contains all of the code used for parsing TOML files.
 # @api private
-module Toby::Parser; end
+module Toby
+  module Parser; end
+end
 
 require_relative 'toby/toml/array'
 require_relative 'toby/toml/inline_table'
