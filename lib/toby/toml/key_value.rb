@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
-# Represents a TOML key-value pair
-# @see https://toml.io/en/v1.0.0-rc.3#keyvalue-pair
 module Toby
   module TOML
+    # Represents a TOML key-value pair
+    # @see https://toml.io/en/v1.0.0-rc.3#keyvalue-pair
     class KeyValue
       # @return [String] The key of the key-value pair.
       attr_reader :key

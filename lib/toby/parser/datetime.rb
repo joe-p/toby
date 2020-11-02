@@ -2,24 +2,28 @@
 
 module Toby
   module Parser
+    # @see https://toml.io/en/v1.0.0-rc.3#offset-date-time
     class OffsetDateTime < Time
       def to_s
         strftime('%Y-%m-%dT%H:%M:%S%z')
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#local-date-time
     class LocalDateTime < Time
       def to_s
         strftime('%Y-%m-%dT%H:%M:%S')
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#local-date
     class LocalDate < Time
       def to_s
         strftime('%Y-%m-%d')
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#local-time
     class LocalTime < Time
       def to_s
         strftime('%Y-%m-%dT%H:%M:%S')
@@ -27,6 +31,7 @@ module Toby
     end
 
     module Match
+      # @see https://toml.io/en/v1.0.0-rc.3#offset-date-time
       module OffsetDateTime
         def value
           skeleton = captures[:datetime_skeleton].first
@@ -38,6 +43,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#local-date-time
       module LocalDateTime
         def value
           year, mon, day = captures[:date_skeleton].first.value
@@ -48,6 +54,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#local-date
       module LocalDate
         def value
           year, mon, day = captures[:date_skeleton].first.value
@@ -55,6 +62,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#local-time
       module LocalTime
         def value
           hour, min, sec, sec_frac = captures[:time_skeleton].first.value

@@ -4,6 +4,7 @@
 require 'minitest/autorun'
 require_relative '../lib/toby'
 
+# Tests the TOMLFile#to_json functionality by comparing the actual output to the expected output
 class JsonTests < Minitest::Test
   def json_test(file_name)
     expected_output = File.read("./examples/expected_outputs/spec_json/#{file_name}.json")

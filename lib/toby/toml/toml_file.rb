@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
-# Represents an entire TOML file
-# @see https://toml.io/en/v1.0.0-rc.3
 module Toby
   module TOML
+    # Represents an entire TOML file
+    # @see https://toml.io/en/v1.0.0-rc.3
     class TOMLFile < Toby::TOML::Table
       # @return [Array<Toby::TOML::Table>] The tables in the TOML file
       attr_reader :tables

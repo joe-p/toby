@@ -3,6 +3,7 @@
 module Toby
   module Parser
     module Match
+      # @see https://toml.io/en/v1.0.0-rc.3#inline-table
       module InlineTable
         def value
           kv_array = []
@@ -15,12 +16,14 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#array
       module Array
         def value
           Toby::TOML::Array.new capture(:array_elements).value
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#keyvalue-pair
       module KeyValue
         def keys
           capture(:stripped_key).value
@@ -43,6 +46,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#table
       module Table
         def toml_object
           Toby::TOML::Table.new(
@@ -53,6 +57,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#array-of-tables
       module ArrayTable
         def toml_object
           Toby::TOML::Table.new(
@@ -63,6 +68,7 @@ module Toby
         end
       end
 
+      # @see https://toml.io/en/v1.0.0-rc.3#comment
       module Comment
         def stripped_comment
           value.sub('#', '').strip!

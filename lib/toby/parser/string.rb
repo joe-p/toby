@@ -42,12 +42,14 @@ module Toby
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#string
     module LiteralString
       def value
         first.value[1...-1]
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#string
     module MultilineString
       def value
         return '' if captures[:text].empty?
@@ -61,6 +63,7 @@ module Toby
       end
     end
 
+    # @see https://toml.io/en/v1.0.0-rc.3#string
     module MultilineLiteral
       def value
         return '' if captures[:text].empty?

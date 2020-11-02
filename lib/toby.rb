@@ -8,14 +8,14 @@ require 'json'
 # Contains all of the code for the Toby gem.
 module Toby; end
 
-# Contains all of code for TOML objects.
 module Toby
+  # Contains all of code for TOML objects.
   module TOML; end
 end
 
-# Contains all of the code used for parsing TOML files.
-# @api private
 module Toby
+  # Contains all of the code used for parsing TOML files.
+  # @api private
   module Parser; end
 end
 
