@@ -26,7 +26,7 @@ module Toby
     # @see https://toml.io/en/v1.0.0-rc.3#local-time
     class LocalTime < Time
       def to_s
-        strftime('%Y-%m-%dT%H:%M:%S')
+        utc.strftime('%H:%M:%S.%L')
       end
     end
 
