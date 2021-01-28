@@ -21,10 +21,12 @@ module Toby
         output.string
       end
 
-      # @param options [Hash] The options hash for the object's #to_hash method when applicable (see Toby::TOML::TOMLFile#to_hash)
-      # @return [Array] Returns the value of #value, the value of #to_hash, or the object itself for every object in the Toby::TOML::Array
+      # @param options [Hash] The options hash for the object's #to_hash method when applicable
+      #   (see Toby::TOML::TOMLFile#to_hash)
+      # @return [Array] Returns the value of #value, the value of #to_hash,
+      #   or the object itself for every object in the Toby::TOML::Array
       def to_hash(options = {})
-        h = map do |obj|
+        map do |obj|
           if obj.respond_to?(:value)
             obj.value
           elsif obj.respond_to?(:to_hash)

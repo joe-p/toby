@@ -11,7 +11,8 @@ module Toby
       # @return [::Array] The dotted keys of the key-value pair.
       attr_reader :split_keys
 
-      # @return [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the key-value pair.
+      # @return [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the
+      #   key-value pair.
       attr_accessor :value
 
       # @return [Toby::TOML::Table] The table the key-value pair belongs to.
@@ -24,7 +25,8 @@ module Toby
       attr_accessor :inline_comment
 
       # @param split_keys [::Array] Dotted keys of the key-value pair.
-      # @param value [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the key-value pair.
+      # @param value [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the
+      #   key-value pair.
       # @param inline_comment [String] The comment in-line with the key-value pair.
       def initialize(split_keys, value, inline_comment)
         @split_keys = split_keys
