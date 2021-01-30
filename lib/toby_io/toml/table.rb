@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-module Toby
+module TobyIO
   module TOML
     # Represents a TOML table
     # @see https://toml.io/en/v1.0.0-rc.3#table
@@ -12,7 +12,7 @@ module Toby
       # @return [String] The name of table.
       attr_reader :name
 
-      # @return [::Array<Toby::TOML::KeyValue>] The key-value pairs within the table.
+      # @return [::Array<TobyIO::TOML::KeyValue>] The key-value pairs within the table.
       attr_accessor :key_values
 
       # @return [::Array<String>] The header comments above the table.

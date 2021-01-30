@@ -2,7 +2,7 @@
 # frozen_string_literal: false
 
 require 'minitest/autorun'
-require_relative '../lib/toby'
+require_relative '../lib/toby_io'
 
 # Tests the TOMLFile#dump functionality by comparing the actual output to the expected output
 class DumpTests < Minitest::Test
@@ -10,7 +10,7 @@ class DumpTests < Minitest::Test
     expected_output = File.read("./examples/expected_outputs/#{file_name}.toml")
     input_file = File.read("./examples/#{file_name}.toml")
 
-    assert Toby::TOML::TOMLFile.new(input_file).dump == expected_output
+    assert TobyIO::TOML::TOMLFile.new(input_file).dump == expected_output
   end
 
   def test_0_5_0_dump
