@@ -7,8 +7,8 @@ require_relative '../lib/toby_io'
 # Tests the TOMLFile#dump functionality by comparing the actual output to the expected output
 class DumpTests < Minitest::Test
   def dump_test(file_name)
-    expected_output = File.read("./examples/expected_outputs/#{file_name}.toml")
-    input_file = File.read("./examples/#{file_name}.toml")
+    expected_output = File.read("#{__dir__}/examples/expected_outputs/#{file_name}.toml")
+    input_file = File.read("#{__dir__}/examples/#{file_name}.toml")
 
     assert TobyIO::TOML::TOMLFile.new(input_file).dump == expected_output
   end

@@ -7,7 +7,7 @@ require_relative '../lib/toby_io'
 # Tests that ensure no exceptions occur when instantiating a TobyIO::TOML::TOMLFile instance
 class InstantiationTests < Minitest::Test
   def instantiation_test(file_name)
-    TobyIO::TOML::TOMLFile.new(File.read("./examples/#{file_name}.toml"))
+    TobyIO::TOML::TOMLFile.new(File.read("#{__dir__}/examples/#{file_name}.toml"))
   end
 
   def test_0_5_0_instantiation
