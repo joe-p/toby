@@ -1,9 +1,11 @@
-source 'https://rubygems.org' do
-    gem 'citrus'
+# frozen_string_literal: false
 
-    group :dev do
-        gem 'pry'
-        gem 'minitest'
-        gem 'yard'
-    end
+source 'https://rubygems.org' do
+  gem 'citrus'
+
+  group :dev do
+    gem 'minitest'
+    gem 'pry'
+    gem 'yard'
+  end
 end
