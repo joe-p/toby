@@ -8,10 +8,11 @@ on:
 jobs:
   test:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}-latest
 
     strategy:
       matrix:
+        os: [ macos, windows, ubuntu]
         ruby-version: [3.0.0, 2.7.2, 2.6.6, 2.5.8]
 
     steps:
