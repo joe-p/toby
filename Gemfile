@@ -7,5 +7,6 @@ source 'https://rubygems.org' do
     gem 'minitest'
     gem 'pry'
     gem 'yard'
+    gem 'rake'
   end
 end

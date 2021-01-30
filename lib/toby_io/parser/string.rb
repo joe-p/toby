@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Toby
+module TobyIO
   module Parser
     # Used in primitive.citrus
     module BasicString
@@ -16,7 +16,7 @@ module Toby
       }.freeze
 
       def value
-        aux = Toby::Parser::BasicString.transform_escaped_chars first.value
+        aux = TobyIO::Parser::BasicString.transform_escaped_chars first.value
 
         aux[1...-1]
       end
@@ -59,7 +59,7 @@ module Toby
         # Remove spaces on multilined Singleline strings
         aux.gsub!(/\\\r?\n[\n\t\r ]*/, '')
 
-        Toby::Parser::BasicString.transform_escaped_chars aux
+        TobyIO::Parser::BasicString.transform_escaped_chars aux
       end
     end
 
