@@ -1,10 +1,8 @@
 name: TobyIO CI
 
 on:
-  push:
-    branches: [ $default-branch ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
@@ -14,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby-version: [3.0.x, 2.7.x, 2.6.x, 2.5.x]
+        ruby-version: [3.0.0, 2.7.2, 2.6.6, 2.5.8]
 
     steps:
     - uses: actions/checkout@v2
