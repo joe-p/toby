@@ -23,7 +23,7 @@ require_relative 'toby/toml/array'
 require_relative 'toby/toml/inline_table'
 require_relative 'toby/toml/key_value'
 require_relative 'toby/toml/table'
-require_relative 'toby/toml/toml_file'
+require_relative 'toby/toml/toml_data'
 
 require_relative 'toby/parser/string'
 require_relative 'toby/parser/datetime'
