@@ -22,7 +22,7 @@ module Toby
       end
 
       # @param options [Hash] The options hash for the object's #to_hash method when applicable
-      #   (see Toby::TOML::TOMLFile#to_hash)
+      #   (see Toby::TOML::TOMLData#to_hash)
       # @return [Array] Returns the value of #value, the value of #to_hash,
       #   or the object itself for every object in the Toby::TOML::Array
       def to_hash(options = {})

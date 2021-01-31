@@ -4,7 +4,7 @@ module Toby
   module TOML
     # Represents an entire TOML file
     # @see https://toml.io/en/v1.0.0-rc.3
-    class TOMLFile < Toby::TOML::Table
+    class TOMLData < Toby::TOML::Table
       # @return [Array<Toby::TOML::Table>] The tables in the TOML file
       attr_reader :tables
 
@@ -54,7 +54,7 @@ module Toby
         end
 
         tables.each do |table|
-          next if table.is_a? Toby::TOML::TOMLFile
+          next if table.is_a? Toby::TOML::TOMLData
 
           output.puts table.dump
         end
