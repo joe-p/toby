@@ -4,10 +4,10 @@
 require 'minitest/autorun'
 require_relative '../lib/toby'
 
-# Tests that ensure no exceptions occur when instantiating a Toby::TOML::TOMLFile instance
+# Tests that ensure no exceptions occur when instantiating a Toby::TOML::TOMLData instance
 class InstantiationTests < Minitest::Test
   def instantiation_test(file_name)
-    Toby::TOML::TOMLFile.new(File.read("#{__dir__}/examples/#{file_name}.toml"))
+    Toby::TOML::TOMLData.new(File.read("#{__dir__}/examples/#{file_name}.toml"))
   end
 
   def test_0_5_0_instantiation

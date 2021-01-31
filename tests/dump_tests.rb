@@ -4,13 +4,13 @@
 require 'minitest/autorun'
 require_relative '../lib/toby'
 
-# Tests the TOMLFile#dump functionality by comparing the actual output to the expected output
+# Tests the TOMLData#dump functionality by comparing the actual output to the expected output
 class DumpTests < Minitest::Test
   def dump_test(file_name)
     expected_output = File.read("#{__dir__}/examples/expected_outputs/#{file_name}.toml")
     input_file = File.read("#{__dir__}/examples/#{file_name}.toml")
 
-    assert Toby::TOML::TOMLFile.new(input_file).dump == expected_output
+    assert Toby::TOML::TOMLData.new(input_file).dump == expected_output
   end
 
   def test_0_5_0_dump
