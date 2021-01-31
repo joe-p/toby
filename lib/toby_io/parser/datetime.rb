@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module TobyIO
+module Toby
   module Parser
     # @see https://toml.io/en/v1.0.0-rc.3#offset-date-time
     class OffsetDateTime < Time
@@ -39,7 +39,7 @@ module TobyIO
           offset = captures[:date_offset].first || '+00:00'
           sec = "#{sec}.#{sec_frac}".to_f
 
-          TobyIO::Parser::OffsetDateTime.new(year, mon, day, hour, min, sec, offset.to_s)
+          Toby::Parser::OffsetDateTime.new(year, mon, day, hour, min, sec, offset.to_s)
         end
       end
 
@@ -50,7 +50,7 @@ module TobyIO
           hour, min, sec, sec_frac = captures[:time_skeleton].first.value
           usec = sec_frac.to_s.ljust(6, '0')
 
-          TobyIO::LocalDateTime.local(year, mon, day, hour, min, sec, usec)
+          Toby::LocalDateTime.local(year, mon, day, hour, min, sec, usec)
         end
       end
 
@@ -58,7 +58,7 @@ module TobyIO
       module LocalDate
         def value
           year, mon, day = captures[:date_skeleton].first.value
-          TobyIO::Parser::LocalDate.local(year, mon, day)
+          Toby::Parser::LocalDate.local(year, mon, day)
         end
       end
 
@@ -68,7 +68,7 @@ module TobyIO
           hour, min, sec, sec_frac = captures[:time_skeleton].first.value
           usec = sec_frac.to_s.ljust(6, '0')
 
-          TobyIO::Parser::LocalTime.at(3600 * hour.to_i + 60 * min.to_i + sec.to_i, usec.to_i)
+          Toby::Parser::LocalTime.at(3600 * hour.to_i + 60 * min.to_i + sec.to_i, usec.to_i)
         end
       end
     end

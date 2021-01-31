@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module TobyIO
+module Toby
   module Parser
     # @see https://toml.io/en/v1.0.0-rc.3#integer
     class Hexadecimal < DelegateClass(Integer)
@@ -42,21 +42,21 @@ module TobyIO
       # @see https://toml.io/en/v1.0.0-rc.3#integer
       module Hexadecimal
         def value
-          TobyIO::Parser::Hexadecimal.new(to_str.to_i(16))
+          Toby::Parser::Hexadecimal.new(to_str.to_i(16))
         end
       end
 
       # @see https://toml.io/en/v1.0.0-rc.3#integer
       module Binary
         def value
-          TobyIO::Parser::Binary.new(to_str.to_i(2))
+          Toby::Parser::Binary.new(to_str.to_i(2))
         end
       end
 
       # @see https://toml.io/en/v1.0.0-rc.3#integer
       module Octal
         def value
-          TobyIO::Parser::Octal.new(to_str.to_i(8))
+          Toby::Parser::Octal.new(to_str.to_i(8))
         end
       end
     end

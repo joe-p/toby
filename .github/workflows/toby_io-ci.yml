@@ -1,4 +1,4 @@
-name: TobyIO CI
+name: Toby CI
 
 on:
   pull_request:
