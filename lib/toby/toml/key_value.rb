@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-module TobyIO
+module Toby
   module TOML
     # Represents a TOML key-value pair
     # @see https://toml.io/en/v1.0.0-rc.3#keyvalue-pair
@@ -11,11 +11,11 @@ module TobyIO
       # @return [::Array] The dotted keys of the key-value pair.
       attr_reader :split_keys
 
-      # @return [String, Integer, Float, Time, TobyIO::TOML::Array, TobyIO::TOML::InlineTable] The value of the
+      # @return [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the
       #   key-value pair.
       attr_accessor :value
 
-      # @return [TobyIO::TOML::Table] The table the key-value pair belongs to.
+      # @return [Toby::TOML::Table] The table the key-value pair belongs to.
       attr_accessor :table
 
       # @return [::Array<String>] The header comments above the key-value pair.
@@ -25,7 +25,7 @@ module TobyIO
       attr_accessor :inline_comment
 
       # @param split_keys [::Array] Dotted keys of the key-value pair.
-      # @param value [String, Integer, Float, Time, TobyIO::TOML::Array, TobyIO::TOML::InlineTable] The value of the
+      # @param value [String, Integer, Float, Time, Toby::TOML::Array, Toby::TOML::InlineTable] The value of the
       #   key-value pair.
       # @param inline_comment [String] The comment in-line with the key-value pair.
       def initialize(split_keys, value, inline_comment)

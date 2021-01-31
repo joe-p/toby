@@ -1,24 +1,24 @@
-grammar TobyIO::Document
-  include TobyIO::Primitive
+grammar Toby::Document
+  include Toby::Primitive
 
   rule document
     (comment | table_array | table | keyvalue | line_break)*
   end
 
   rule table_array
-    (space? '[[' stripped_key ']]' comment?) <TobyIO::Parser::Match::ArrayTable>
+    (space? '[[' stripped_key ']]' comment?) <Toby::Parser::Match::ArrayTable>
   end
 
   rule table
-    (space? '[' stripped_key ']' comment?) <TobyIO::Parser::Match::Table>
+    (space? '[' stripped_key ']' comment?) <Toby::Parser::Match::Table>
   end
 
   rule keyvalue
-    (stripped_key '=' space? v:(toml_values) comment?) <TobyIO::Parser::Match::KeyValue>
+    (stripped_key '=' space? v:(toml_values) comment?) <Toby::Parser::Match::KeyValue>
   end
 
   rule inline_table
-    (space? '{' (keyvalue? (',' keyvalue)*)? space? '}' ) <TobyIO::Parser::Match::InlineTable>
+    (space? '{' (keyvalue? (',' keyvalue)*)? space? '}' ) <Toby::Parser::Match::InlineTable>
   end
 
   rule array_comments
@@ -26,7 +26,7 @@ grammar TobyIO::Document
   end
 
   rule array
-    ("[" array_comments (array_elements)? space ","? array_comments "]" indent?) <TobyIO::Parser::Match::Array>
+    ("[" array_comments (array_elements)? space ","? array_comments "]" indent?) <Toby::Parser::Match::Array>
   end
 
   rule array_element

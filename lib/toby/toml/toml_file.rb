@@ -1,11 +1,11 @@
 # frozen_string_literal: false
 
-module TobyIO
+module Toby
   module TOML
     # Represents an entire TOML file
     # @see https://toml.io/en/v1.0.0-rc.3
-    class TOMLFile < TobyIO::TOML::Table
-      # @return [Array<TobyIO::TOML::Table>] The tables in the TOML file
+    class TOMLFile < Toby::TOML::Table
+      # @return [Array<Toby::TOML::Table>] The tables in the TOML file
       attr_reader :tables
 
       # @param input_string [String] The TOML file to parse.
@@ -13,7 +13,7 @@ module TobyIO
         super(nil, '', false)
 
         @tables = [self]
-        matches = TobyIO::Document.parse(input_string).matches
+        matches = Toby::Document.parse(input_string).matches
 
         @comment_buffer = []
 
@@ -54,7 +54,7 @@ module TobyIO
         end
 
         tables.each do |table|
-          next if table.is_a? TobyIO::TOML::TOMLFile
+          next if table.is_a? Toby::TOML::TOMLFile
 
           output.puts table.dump
         end
@@ -149,10 +149,10 @@ module TobyIO
         end
 
         case obj
-        when TobyIO::TOML::Table
+        when Toby::TOML::Table
           @tables << obj
 
-        when TobyIO::TOML::KeyValue
+        when Toby::TOML::KeyValue
           @tables.last.key_values << obj
 
         end

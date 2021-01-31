@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-module TobyIO
+module Toby
   module TOML
     # Represents an inline-table value
     # @see https://toml.io/en/v1.0.0-rc.3#inline-table

@@ -1,6 +1,6 @@
-grammar TobyIO::Helper
+grammar Toby::Helper
   rule comment
-    (space? "#" (~line_break)* line_break?) <TobyIO::Parser::Match::Comment>
+    (space? "#" (~line_break)* line_break?) <Toby::Parser::Match::Comment>
   end
 
   rule space

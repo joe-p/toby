@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module TobyIO
+module Toby
   module Parser
     module Match
       # @see https://toml.io/en/v1.0.0-rc.3#inline-table
@@ -9,17 +9,17 @@ module TobyIO
           kv_array = []
 
           captures(:keyvalue).each do |kv|
-            kv_array << TobyIO::TOML::KeyValue.new(kv.keys, kv.value, nil)
+            kv_array << Toby::TOML::KeyValue.new(kv.keys, kv.value, nil)
           end
 
-          TobyIO::TOML::InlineTable.new kv_array
+          Toby::TOML::InlineTable.new kv_array
         end
       end
 
       # @see https://toml.io/en/v1.0.0-rc.3#array
       module Array
         def value
-          TobyIO::TOML::Array.new capture(:array_elements).value
+          Toby::TOML::Array.new capture(:array_elements).value
         end
       end
 
@@ -38,7 +38,7 @@ module TobyIO
         end
 
         def toml_object
-          TobyIO::TOML::KeyValue.new(
+          Toby::TOML::KeyValue.new(
             keys,
             value,
             comment
@@ -49,7 +49,7 @@ module TobyIO
       # @see https://toml.io/en/v1.0.0-rc.3#table
       module Table
         def toml_object
-          TobyIO::TOML::Table.new(
+          Toby::TOML::Table.new(
             capture(:stripped_key).value,
             capture(:comment)&.stripped_comment,
             false
@@ -60,7 +60,7 @@ module TobyIO
       # @see https://toml.io/en/v1.0.0-rc.3#array-of-tables
       module ArrayTable
         def toml_object
-          TobyIO::TOML::Table.new(
+          Toby::TOML::Table.new(
             capture(:stripped_key).value,
             capture(:comment)&.stripped_comment,
             true

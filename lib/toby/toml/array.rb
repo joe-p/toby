@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-module TobyIO
+module Toby
   module TOML
     # Represents an array value
     # @see https://toml.io/en/v1.0.0-rc.3#array
@@ -22,9 +22,9 @@ module TobyIO
       end
 
       # @param options [Hash] The options hash for the object's #to_hash method when applicable
-      #   (see TobyIO::TOML::TOMLFile#to_hash)
+      #   (see Toby::TOML::TOMLFile#to_hash)
       # @return [Array] Returns the value of #value, the value of #to_hash,
-      #   or the object itself for every object in the TobyIO::TOML::Array
+      #   or the object itself for every object in the Toby::TOML::Array
       def to_hash(options = {})
         map do |obj|
           if obj.respond_to?(:value)
